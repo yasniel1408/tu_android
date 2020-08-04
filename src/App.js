@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          HOLA MUNDO
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const loading = () => <div className="animated fadeIn pt-3 text-center">Cargando...</div>;
 
+// Pages
+const Home = React.lazy(() => import('./component/Home/Home'));
+const DetallePost = React.lazy(() => import('./component/DetallePost/DetallePost'));
+
+
+class App extends React.Component{
+  render(){
+    return(
+      <HashRouter>
+          <React.Suspense fallback={loading()}>
+            <Switch>
+              <Route exact path="/" name="Home" render={props => <Home {...props}/>} />
+              <Route path="/detallepost" name="Detalle Post" render={props => <DetallePost {...props}/>} />
+            </Switch>
+          </React.Suspense>
+      </HashRouter>
+    )
+  }
+}
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
