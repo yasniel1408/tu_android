@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+//import { HashRouter, Route, Switch } from 'react-router-dom';
 import './Home.scss';
 
-const loading = () => <div className="animated fadeIn pt-1 text-center">Cargando...</div>
+const loading = () => <div className="">Cargando...</div>
 
 // Containers
 const Header = React.lazy(() => import('../Header/Header'));

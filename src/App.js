@@ -16,7 +16,7 @@ class App extends React.Component{
           <React.Suspense fallback={loading()}>
             <Switch>
               <Route exact path="/" name="Home" render={props => <Home {...props}/>} />
-              <Route path="/detallepost" name="Detalle Post" render={props => <DetallePost {...props}/>} />
+              <Route path="/detallepost/:post" name="Detalle Post" render={props => <DetallePost {...props}/>} />
             </Switch>
           </React.Suspense>
       </HashRouter>
