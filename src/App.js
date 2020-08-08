@@ -1,25 +1,38 @@
-import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import './App.scss';
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Cargando...</div>;
+const loading = () => <div className="">Cargando...</div>;
 
 // Pages
-const Home = React.lazy(() => import('./component/Home/Home'));
-const DetallePost = React.lazy(() => import('./component/DetallePost/DetallePost'));
+const DetallePost = React.lazy(() => import('./DetallePost/DetallePost'));
+const Posts = React.lazy(() => import('./Posts/Posts'));
+
+// Containers
+const Header = React.lazy(() => import('./component/Header/Header'));
 
 
 class App extends React.Component{
+
   render(){
     return(
-      <HashRouter>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route exact path="/" name="Home" render={props => <Home {...props}/>} />
-              <Route path="/detallepost/:post" name="Detalle Post" render={props => <DetallePost {...props}/>} />
-            </Switch>
-          </React.Suspense>
-      </HashRouter>
+      <div>
+        <div className="app-header">
+              <Suspense fallback={loading()}>
+                  <Header/>
+              </Suspense>
+          </div>
+          <div className="app-body">
+              <BrowserRouter>
+                <Suspense fallback={loading()}>
+                  <Switch>
+                    <Route exact path="/" name="Posts" render={props => <Posts {...props}/>} />
+                    <Route path="/detallepost" name="Detalle Post" render={props => <DetallePost {...props}/>} />
+                  </Switch>
+                </Suspense>
+            </BrowserRouter>
+          </div>
+        </div> 
     )
   }
 }

@@ -3,3 +3,22 @@
 .cardPost{
     margin-top: 80px;
 }
+
+#formCargar{
+    margin-bottom: 10px;
+    width: 100%;
+    input[type="number"]{
+        width: 80%;
+        height: 35px;
+        border-radius: 10px;
+        border: 0px;
+    }
+    input[type="submit"]{
+        width: 15%;
+        height: 36px;
+        border-radius: 10px;
+        background: $color_barra;
+        border: 0px;
+        color: beige;
+    }
+}
