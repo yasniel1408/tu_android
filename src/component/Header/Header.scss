@@ -1,10 +1,12 @@
 @import "../../App.scss";
 
 #header{
-    //background: $color_barra;
+    background: $color_barra;
     background-image:  url("../../assets/tu_android.png"); 
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    backdrop-filter: $color_barra;
+    background-color: $color_barra;
     width: 100%;
     height: 3.2em;
     padding-top: 15px;
@@ -19,5 +21,5 @@
     width: 12%;
     height: 2.5em;
     margin-left: 5px;
-    border-radius: 15px;
+    visibility: hidden;
 }

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import {Route, Switch, HashRouter } from 'react-router-dom';
 import './App.scss';
 
 const loading = () => <div className="">Cargando...</div>;
@@ -16,28 +16,24 @@ class App extends React.Component{
 
   render(){
     return(
-      <div>
-        <div className="app-header">
-              <Suspense fallback={loading()}>
-                  <Header/>
-              </Suspense>
-          </div>
-          <div className="app-body">
-              <BrowserRouter>
-                <Suspense fallback={loading()}>
-                  <Switch>
-                    <Route exact path="/" name="Posts" render={props => <Posts {...props}/>} />
-                    <Route path="/detallepost" name="Detalle Post" render={props => <DetallePost {...props}/>} />
-                  </Switch>
-                </Suspense>
-            </BrowserRouter>
-          </div>
-        </div> 
+      <div className="app-body">
+          <HashRouter>
+            <Suspense fallback={loading()}>
+              <Header/>
+              <Switch>
+                <Route exact path="/" name="Posts" render={props => <Posts {...props}/>} />
+                <Route path="/detallepost" name="Detalle Post" render={props => <DetallePost {...props}/>} />
+              </Switch>
+            </Suspense>
+          </HashRouter>
+      </div>
     )
   }
 }
 export default App;
 
+//https://jorgen.cubava.cu/wp-json/wp/v2/categories
+//https://jorgen.cubava.cu/wp-json/wp/v2/posts?categories=88
 
 
 

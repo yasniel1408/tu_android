@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import { Link } from 'react-router-dom';
 
 class Header extends React.Component{
 
@@ -11,17 +12,18 @@ class Header extends React.Component{
   }
 
   back(){
-    //this.props.history.push('/')
-    alert("OKOKOK")
+    //let back = document.getElementById("boton-atras")
+    //back.setAttribute("visibility", 'hiden')
   }
-
 
   render(){
     return(
         <header id="header">
-          <div id="boton-atras" className="link">
-            <div id="back" onClick={this.back} > </div>
-          </div>
+          <Link to={'/'}>
+            <div id="boton-atras" onClick={this.back} className="link">
+              <div id="back" > </div>
+            </div>
+          </Link>
         </header>
     )
   }

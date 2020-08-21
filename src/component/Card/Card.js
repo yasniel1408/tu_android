@@ -13,19 +13,50 @@ class Card extends React.Component{
   constructor(props){
     super(props);
     this.state = { 
-      foto:[]
+      foto:[],
+      fotoBase64: ""
    };
+
   }
 
   async componentDidMount(){
-   await axios.get("https://jorgen.cubava.cu/wp-json/wp/v2/media/"+this.props.post.featured_media)
-    .then(response=> this.setState({foto: response.data}))
-    .catch(err=>console.error(err))
+    let image = localStorage.getItem(this.props.post.featured_media)
+    if(image){
+      this.setState({fotoBase64: image})
+      this.cargarImageBase64()
+    }else{
+      await axios.get("https://jorgen.cubava.cu/wp-json/wp/v2/media/"+this.props.post.featured_media)
+      .then((response) =>  {
+        this.setState({foto: response.data})
+        this.convertirImageBase64() 
+      })
+      .catch(err=>console.error(err))
+    }
+  }
+
+  convertirImageBase64(){
+    // let img = document.getElementById(this.state.foto.id)
+    // var canvas = document.createElement("canvas");
+    // canvas.width = img.width;
+    // canvas.height = img.height;
+
+    // var ctx = canvas.getContext("2d");
+    // ctx.drawImage(img, 0, 0);
+
+    // var dataURL = ctx.canvas.toDataURL("image/png");
+
+    // localStorage.setItem(this.props.post.featured_media, dataURL.replace(/^data:image\/(png|jpg);base64,/, "")); 
+  }
+
+  cargarImageBase64(){
+        // var picture = localStorage.getItem(this.props.post.featured_media);
+        // var image = document.getElementById(this.state.foto.id);
+        // image.src = "data:image/png;base64," + picture;
   }
 
   render(){
     return(
-        <div className="card">
+        <div className="card" >
           <Link className="link" 
             to={{
               pathname: '/detallepost',
@@ -35,13 +66,14 @@ class Card extends React.Component{
             }}
           >
             <img-card>
-              <Suspense fallback={loading()}>
+                <Suspense fallback={loading()}>
                 <img 
                   src={this.state.foto.source_url}
+                  id={this.state.foto.id}
                   alt={this.state.foto.alt_text}
                   width="100%"
                 />
-              </Suspense>
+                </Suspense>
             </img-card>
             <header-card>
                 <strong>{this.props.post.title.rendered}</strong>

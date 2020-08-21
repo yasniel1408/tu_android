@@ -8,9 +8,10 @@ title-detalle{
     margin-top: 80px !important;
 }
 
-// #attachment{
-//     width:  !important;
-// }
+#attachment{
+    width: 100% !important;
+    height: 20% !important;
+}
 
 .size-full{
     width: 100% !important;
@@ -20,4 +21,13 @@ title-detalle{
 .aligncenter{
     width: 100% !important;
     height: 20% !important;
+}
+
+.alignnone{
+    width: 100% !important;
+    height: 20% !important;
+} 
+
+#back{
+    visibility: visible;
 }
